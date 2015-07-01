@@ -1,7 +1,11 @@
 module.exports = function(cfg){
 	return function tplVariable(req, res, next){
-		if(!cfg || !isObject(cfg)) return next();
-		var func = res.render, o;
+		cfg = cfg || {};
+		if(!isObject(cfg)) return next();
+		var func = res.render, key;
+			key = cfg.variable = cfg.variable || 'o';
+		req.app.set('__dataKey_', key);
+		res.locals[key] = res.locals[key] || {};
 		res.render = function(view, options, fn){
 			extend(res.locals, cfg, isFunction(options)? null : options);
 			func.call(res, view, options, fn);
@@ -42,9 +46,7 @@ function extend(obj, opts){
 			if(opts.blackList && contain(opts.blackList, prop)){
 				obj[prop] = source[prop];
 			} else {
-				var key = opts.variable || 'o';
-				obj[key] = obj[key] || {};
-				obj[key][prop] = source[prop];
+				obj[opts.variable][prop] = source[prop];
 			}
 		}
 	}
