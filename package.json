@@ -1,0 +1,15 @@
+{
+  "name": "tpl-variable",
+  "version": "0.0.1",
+  "description": "template variable",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "vk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valleykid/tpl-variable.git"
+  },
+  "license": "MIT"
+}
